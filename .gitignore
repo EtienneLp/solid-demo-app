@@ -19,3 +19,5 @@ lg/assets
 lg/fonts
 lg/*.ipk
 lg/index.html
+build-storybook.log
+storybook-static/*

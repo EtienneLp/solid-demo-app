@@ -8,7 +8,8 @@
     "start": "vite --host --force",
     "start:dom": "VITE_LIGHTNING_DOM_RENDERING=true vite --host --force",
     "start:prod": "vite --host --force --mode production",
-    "storybook": "storybook dev -p 6006"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "build": "vite build --sourcemap=true --emptyOutDir false",
     "build:tizen": "vite build --config vite.config.tizen.js --base=./ --outDir tizen --emptyOutDir false",
     "build:lg": "vite build --sourcemap=false --base=./ --outDir lg --emptyOutDir false && ares-package lg --outdir lg --no-minify",
@@ -18,11 +19,13 @@
     "build:android": "vite build && npx cap sync android",
     "build:android:apk": "npm run build:android && cd android && JAVA_HOME=/opt/homebrew/opt/openjdk@21 ANDROID_HOME=/opt/homebrew/share/android-commandlinetools ./gradlew assembleDebug",
     "deploy": "gh-pages -d dist -a",
+    "storybook:publish": "chromatic --debug --zip --ci --only-changed --trace-changed --project-token=chpt_feeba3cebf08e9a --storybook-build-dir storybook-static",
     "preview": "vite preview --port 8080 --host",
     "tsc": "tsc",
     "lint:prettier": "prettier --check \"**/*.{ts,js,cjs,md,tsx}\"",
     "lint:fix:prettier": "prettier --write \"**/*.{ts,js,cjs,md,tsx}\"",
-    "test": "vitest"
+    "test": "vitest",
+    "chromatic": "npm run build:storybook && npx chromatic --project-token=chpt_feeba3cebf08e9a"
   },
   "author": "",
   "license": "ISC",
@@ -50,6 +53,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@vitejs/plugin-legacy": "^7.2.1",
     "baseline-browser-mapping": "^2.10.0",
+    "chromatic": "^16.2.0",
     "dayjs": "^1.11.20",
     "gh-pages": "^6.3.0",
     "husky": "^9.1.7",
